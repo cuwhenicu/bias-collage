@@ -6,10 +6,10 @@
 
 // If you want Vite to process your server code then use one of these:
 //  - vavite (https://github.com/cyco130/vavite)
-//     - See vavite + vite-pugin-ssr examples at https://github.com/cyco130/vavite/tree/main/examples
+//     - See vavite + Vike examples at https://github.com/cyco130/vavite/tree/main/examples
 //  - vite-node (https://github.com/antfu/vite-node)
 //  - HatTip (https://github.com/hattipjs/hattip)
-//    - You can use Bati (https://batijs.github.io/) to scaffold a vike + HatTip app. Note that Bati generates apps that use the V1 design (https://vike.dev/migration/v1-design) and Vike packages (https://vike.dev/vike-packages)
+//    - You can use Bati (https://batijs.dev/) to scaffold a Vike + HatTip app. Note that Bati generates apps that use the V1 design (https://vike.dev/migration/v1-design) and Vike packages (https://vike.dev/vike-packages)
 
 import express from 'express'
 import compression from 'compression'
@@ -38,7 +38,7 @@ async function startServer() {
     const viteDevMiddleware = (
       await vite.createServer({
         root,
-        server: { middlewareMode: true }
+        server: { middlewareMode: true },
       })
     ).middlewares
     app.use(viteDevMiddleware)
@@ -52,18 +52,22 @@ async function startServer() {
   // catch-all middleware superseding any middleware placed after it).
   app.get('*', async (req, res, next) => {
     const pageContextInit = {
-      urlOriginal: req.originalUrl
+      urlOriginal: req.originalUrl,
     }
     const pageContext = await renderPage(pageContextInit)
+    if (pageContext.errorWhileRendering) {
+      // Install error tracking here, see https://vike.dev/errors
+    }
     const { httpResponse } = pageContext
     if (!httpResponse) {
       return next()
     } else {
       const { body, statusCode, headers, earlyHints } = httpResponse
-      if (res.writeEarlyHints) res.writeEarlyHints({ link: earlyHints.map((e) => e.earlyHintLink) })
+      if (res.writeEarlyHints)
+        res.writeEarlyHints({ link: earlyHints.map((e) => e.earlyHintLink) })
       headers.forEach(([name, value]) => res.setHeader(name, value))
       res.status(statusCode)
-      // For HTTP streams use httpResponse.pipe() instead, see https://vike.dev/stream
+      // For HTTP streams use httpResponse.pipe() instead, see https://vike.dev/streaming
       res.send(body)
     }
   })

@@ -1,167 +1,20 @@
 module.exports = {
   rules: {
-    'react/button-has-type': 'off',
-    'arrow-body-style': 'off',
-    'no-plusplus': 'off',
-    'react/display-name': 'off',
-    'react/function-component-definition': [
-      'warn',
-      { namedComponents: 'arrow-function' },
-    ],
-    'react/jsx-one-expression-per-line': 'off',
-    'react/jsx-filename-extension': [
-      'error',
-      { extensions: ['.js', '.jsx', '.ts', '.tsx'] },
-    ],
-    'react/jsx-props-no-spreading': 'off',
-    'react/require-default-props': 'off',
-    'react/jsx-wrap-multilines': 'off',
-    'react/react-in-jsx-scope': 'off',
-    'react/prop-types': 'off',
-    'import/prefer-default-export': 'off',
-    'import/no-unresolved': 'off',
-    'no-restricted-exports': [
-      'error',
-      { restrictDefaultExports: { defaultFrom: false } },
-    ],
-    'import/order': [
-      'error',
-      {
-        pathGroups: [
-          {
-            pattern: '@/lib/**',
-            group: 'external',
-          },
-          {
-            pattern: '{types/*,@/types*,./types}',
-            group: 'type',
-          },
-          {
-            pattern:
-              '{hooks,@/hooks/**/*,./hooks/**,./use**,../use**,../../use**,../../../use**,,../../hooks/**,./_hooks/**,../../../_hooks/**}',
-            group: 'internal',
-          },
-          {
-            pattern: '{utils/**/*,./utils,../utils,../../utils,../../../utils}',
-            group: 'type',
-          },
-          {
-            pattern: '{@/constants/*,./constants}',
-            group: 'type',
-          },
-          {
-            pattern:
-              '{states/**/*,./states*,./**/states*,../states*,../../states*,../../../states*,,../../../../states*,**/**/**/states*}',
-            group: 'type',
-          },
-          {
-            pattern: '@/services/**',
-            group: 'type',
-          },
-          {
-            pattern: '{./helpers,./data,./config,./defaults,../../../defaults}',
-            group: 'type',
-          },
-          {
-            pattern:
-              '{components,components/_common/**,@/components,@/components/**,svgs,@/assets/**/*,@/app/**,routes/**,public/**}',
-            group: 'index',
-          },
-          {
-            pattern: '{styles,./*.scss,../*.scss,../*.module.scss}',
-            group: 'index',
-          },
-        ],
-        groups: [
-          ['external', 'builtin'],
-          ['type', 'internal', 'object'],
-          ['parent', 'sibling', 'index'],
-        ],
-        'newlines-between': 'always',
-      },
-    ],
-    'import/no-anonymous-default-export': 'off',
-    'import/no-extraneous-dependencies': [
-      'error',
-      {
-        devDependencies: [
-          '**/*.test.tsx',
-          '**/*.stories.*',
-          '**/.storybook/**/*.*',
-          'setupTests.ts',
-        ],
-        peerDependencies: true,
-      },
-    ],
-    'import/extensions': [
-      'error',
-      'ignorePackages',
-      {
-        js: 'never',
-        jsx: 'never',
-        ts: 'never',
-        tsx: 'never',
-      },
-    ],
-    'no-param-reassign': ['error', { props: false }],
-    'no-unused-expressions': ['warn'],
-    'no-unused-vars': 'off',
-    'no-shadow': 'off',
-    '@typescript-eslint/no-shadow': ['error'],
-    '@typescript-eslint/camelcase': 'off',
-    '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
-    'prefer-destructuring': ['error', { object: true, array: false }],
-    'lines-between-class-members': 'off',
-    'jsx-a11y/click-events-have-key-events': 'off',
-    'jsx-a11y/label-has-associated-control': [
-      'error',
-      {
-        labelComponents: ['label'],
-        labelAttributes: ['htmlFor'],
-        controlComponents: ['input'],
-      },
-    ],
+    'react-refresh/only-export-components': 'warn',
+    '@typescript-eslint/no-namespace': 'off'
   },
   reportUnusedDisableDirectives: true,
   ignorePatterns: ['dist/*'],
-  env: { browser: true, es2020: true, node: true, jasmine: true, jest: true },
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json'],
-  },
-  settings: {
-    react: {
-      // Tells eslint-plugin-react to automatically detect the version of React to use.
-      version: 'detect',
-    },
-    'import/extensions': ['.js', '.jsx', '.ts', '.tsx'],
-    'import/resolver': {
-      node: {
-        paths: ['src'],
-        extensions: ['.js', '.jsx', '.ts', '.tsx'],
-      },
-      typescript: {
-        project: '.',
-      },
-    },
-  },
-  plugins: [
-    'react-refresh',
-    'react',
-    'react-hooks',
-    '@typescript-eslint',
-    'prettier',
-  ],
+  env: { browser: true, es2020: true, node: true },
+  parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
+  settings: { react: { version: 'detect' } },
+  plugins: ['react-refresh'],
   extends: [
-    'airbnb',
-    'airbnb/hooks',
-    'airbnb-typescript',
+    'eslint:recommended',
     'plugin:react/recommended',
-    'plugin:jsx-a11y/recommended',
-    'eslint-config-prettier',
-    'prettier',
+    'plugin:react/jsx-runtime',
+    'plugin:react-hooks/recommended',
+    'plugin:@typescript-eslint/recommended'
   ],
-  parser: '@typescript-eslint/parser',
-  globals: { navigation: 'readonly', globalThis: false, NodeJS: true },
+  parser: '@typescript-eslint/parser'
 }

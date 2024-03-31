@@ -1,35 +1,25 @@
-export type { PageContextServer }
-export type { PageContextClient }
-export type { PageContext }
-export type { PageProps }
-
-import type {
-  PageContextBuiltInServer,
-  /*
-  // When using Client Routing https://vike.dev/clientRouting
-  PageContextBuiltInClientWithClientRouting as PageContextBuiltInClient
-  /*/
-  // When using Server Routing
-  PageContextBuiltInClientWithServerRouting as PageContextBuiltInClient
-  //*/
-} from 'vike/types'
-
-type Page = (pageProps: PageProps) => React.ReactElement
-type PageProps = Record<string, unknown>
-
-export type PageContextCustom = {
-  Page: Page
-  pageProps?: PageProps
-  urlPathname: string
-  exports: {
-    documentProps?: {
-      title?: string
-      description?: string
+// https://vike.dev/pageContext#typescript
+declare global {
+  namespace Vike {
+    interface PageContext {
+      Page: () => React.ReactElement
+      data?: {
+        /** Value for <title> defined dynmically by by /pages/some-page/+data.js */
+        title?: string
+        /** Value for <meta name="description"> defined dynmically */
+        description?: string
+      }
+      config: {
+        /** Value for <title> defined statically by /pages/some-page/+title.js (or by `export default { title }` in /pages/some-page/+config.js) */
+        title?: string
+        /** Value for <meta name="description"> defined statically */
+        description?: string
+      }
+      /** https://vike.dev/render */
+      abortReason?: string
     }
   }
 }
 
-type PageContextServer = PageContextBuiltInServer<Page> & PageContextCustom
-type PageContextClient = PageContextBuiltInClient<Page> & PageContextCustom
-
-type PageContext = PageContextClient | PageContextServer
+// Tell TypeScript this file isn't an ambient module
+export {}
