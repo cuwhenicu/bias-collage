@@ -1,9 +1,7 @@
 export { PageShell }
 
 import React from 'react'
-import logoUrl from './logo.svg'
 import { PageContextProvider } from './usePageContext'
-import { Link } from './Link'
 import type { PageContext } from 'vike/types'
 import './css/index.css'
 import './PageShell.css'
