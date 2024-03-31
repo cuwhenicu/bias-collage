@@ -1,5 +1,5 @@
 import react from '@vitejs/plugin-react'
-import ssr from 'vite-plugin-ssr/plugin'
+import ssr from 'vike/plugin'
 import { UserConfig } from 'vite'
 import styleX from 'vite-plugin-stylex'
 import jotaiDebugLabel from 'jotai/babel/plugin-debug-label'

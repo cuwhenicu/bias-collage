@@ -5,7 +5,7 @@ import { PageShell } from './PageShell'
 import type { PageContextClient } from './types'
 import { Provider as JotaiProvider } from 'jotai'
 
-// This render() hook only supports SSR, see https://vite-plugin-ssr.com/render-modes for how to modify render() to support SPA
+// This render() hook only supports SSR, see https://vike.dev/render-modes for how to modify render() to support SPA
 async function render(pageContext: PageContextClient) {
   const { Page, pageProps } = pageContext
   if (!Page)
@@ -26,4 +26,4 @@ async function render(pageContext: PageContextClient) {
 
 /* To enable Client-side Routing:
 export const clientRouting = true
-// !! WARNING !! Before doing so, read https://vite-plugin-ssr.com/clientRouting */
+// !! WARNING !! Before doing so, read https://vike.dev/clientRouting */
