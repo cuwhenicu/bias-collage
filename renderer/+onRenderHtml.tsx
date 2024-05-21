@@ -2,10 +2,10 @@
 export { onRenderHtml }
 
 import ReactDOMServer from 'react-dom/server'
-import { PageShell } from './PageShell'
+import { PageShell } from './PageShell.js'
 import { escapeInject, dangerouslySkipEscape } from 'vike/server'
 import type { OnRenderHtmlAsync } from 'vike/types'
-import { getPageTitle } from './getPageTitle'
+import { getPageTitle } from './getPageTitle.js'
 
 const onRenderHtml: OnRenderHtmlAsync = async (
   pageContext,

@@ -1,13 +1,9 @@
-export { Page };
+import App from '../App'
 
-function Page() {
+export default function Page() {
   return (
     <>
-      <h1>Welcome</h1>
-      This page is:
-      <ul>
-        <li>Rendered to HTML.</li>
-      </ul>
+      <App />
     </>
-  );
+  )
 }

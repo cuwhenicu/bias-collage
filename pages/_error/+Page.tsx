@@ -1,12 +1,14 @@
 export { Page }
 
-import { usePageContext } from '../../renderer/usePageContext'
+import { usePageContext } from '../../../server/renderer/usePageContext'
 
 function Page() {
   const pageContext = usePageContext()
   let { abortReason } = pageContext
   if (!abortReason) {
-    abortReason = pageContext.is404 ? 'Page not found.' : 'Something went wrong.'
+    abortReason = pageContext.is404
+      ? 'Page not found.'
+      : 'Something went wrong.'
   }
   return (
     <Center>
@@ -22,7 +24,7 @@ function Center({ children }: { children: React.ReactNode }) {
         height: 'calc(100vh - 100px)',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
       }}
     >
       {children}
